@@ -1,0 +1,23 @@
+
+
+server:
+  port: 8080
+demo:
+  service:
+    version: 1.0.0
+dubbo:
+  application:
+    id: dubbo-consumer-demo
+    name: dubbo-consumer-demo
+    qos-port: 22233
+  protocol:
+    id: dubbo2
+    name: dubbo
+    host: 127.0.0.1
+    port: 12345
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    file: E:\Cache\consumer\dubbo.cache
+  consumer:
+    check: false
+

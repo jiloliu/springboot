@@ -1,0 +1,80 @@
+server:
+  port: 8080
+
+
+demo:
+  service:
+    version: 1.0.0
+
+dubbo:
+  application:
+    id: dubbo-provider-demo
+    name: dubbo-provider-demo
+  protocol:
+    id: dubbo1
+    name: dubbo
+    host: 127.0.0.1
+    port: -1
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    file: E:\Cache\provider\dubbo.cache
+  consumer:
+    check: false
+
+
+
+spring:
+
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        max-active: 600
+        max-idle: 300
+        max-wait: 10s
+    database: 0
+  session:
+    store-type: redis
+    timeout: 600s
+  datasource:
+    name: test
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/star_net?characterEncoding=utf8&useSSL=true&useUnicode=true
+      username: root
+      password: '123456'
+      filter: stat
+      driver-class-name: com.mysql.jdbc.Driver
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      #获取连接等待超时时间
+      max-wait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      #一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+
+
+mybatis:
+  #dao-locations: classpath:mapping/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  #type-aliases-package: cn.starnet.dubboproviderdemo.model  # 注意：对应实体类的路径
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
